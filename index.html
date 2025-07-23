@@ -145,7 +145,27 @@
             font-size: 1.8em;
             color: var(--heading-color);
             cursor: pointer;
+            /* Adicionado: Animação para o menu hambúrguer */
+            animation: bounce 2s infinite 3s; /* Animação após 3s de atraso, infinita */
+            transform-origin: center; /* Garante que o movimento seja centralizado */
         }
+        .hamburger-menu:hover {
+            animation: none; /* Para a animação ao passar o mouse */
+        }
+
+        /* Keyframes para a animação de "tremor" */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(0);
+            }
+            40% {
+                transform: translateX(-5px);
+            }
+            60% {
+                transform: translateX(5px);
+            }
+        }
+
         /* --- 2. Seção Herói (Hero Section) --- */
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg') no-repeat center center/cover;
