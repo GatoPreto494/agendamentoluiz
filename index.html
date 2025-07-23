@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha Seu Plano de TV e Agende - [Nome da Sua Empresa]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* style.css */
+        /* Variáveis de Cores e Fontes */
+        :root {
+            --primary-color: #007bff; /* Azul para destaque e botões principais */
+            --secondary-color: #6c757d; /* Cinza para botões secundários */
+            --accent-color: #28a745; /* Verde para WhatsApp e sucesso */
+            --text-color: #343a40; /* Cor padrão do texto */
+            --heading-color: #212529; /* Cor dos títulos */
+            --background-light: #f8f9fa; /* Fundo claro para seções */
+            --background-dark: #212529; /* Fundo escuro para rodapé */
+            --card-bg: #ffffff; /* Fundo de cards e formulários */
+            --border-color: #dee2e6; /* Cor de bordas e divisores */
+
+            --font-primary: 'Montserrat', sans-serif; /* Para títulos e elementos importantes */
+            --font-secondary: 'Open Sans', sans-serif; /* Para corpo de texto */
+        }
+        /* Reset Básico e Box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-light);
+            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+        }
+        /* Utilitários */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        section {
+            padding: 80px 0; /* Espaçamento padrão entre seções */
+            position: relative;
+        }
+        h1, h2, h3 {
+            font-family: var(--font-primary);
+            color: var(--heading-color);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        h1 { font-size: 3.2em; line-height: 1.2; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Tom mais escuro de primary */
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--card-bg);
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Tom mais escuro de secondary */
+            transform: translateY(-2px);
+        }
+        .btn-whatsapp {
+            background-color: var(--accent-color);
+            color: var(--card-bg);
+            padding: 15px 30px;
+            font-size: 1.1em;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Espaço entre ícone e texto */
+        }
+        .btn-whatsapp:hover {
+            background-color: #218838; /* Tom mais escuro de accent */
+            transform: translateY(-2px);
+        }
+        /* --- 1. Cabeçalho (Header) --- */
+        .main-header {
+            background-color: var(--card-bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: center; /* Centraliza o conteúdo horizontalmente */
+            align-items: center;
+        }
+        /* REMOVIDO: .main-header .logo img { ... } */
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            justify-content: center; /* CENTRALIZADO AQUI */
+            flex-grow: 1; /* Permite que o menu ocupe o espaço disponível para centralizar melhor */
+        }
+        .main-nav ul li a {
+            text-decoration: none;
+            color: var(--heading-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .main-nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        .header-btn {
+            padding: 8px 20px;
+        }
+        /* Menu Hamburguer (escondido por padrão em desktop) */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--heading-color);
+            cursor: pointer;
+        }
+        /* --- 2. Seção Herói (Hero Section) --- */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg') no-repeat center center/cover;
+            color: var(--card-bg);
+            text-align: center;
+            padding: 120px 20px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .hero-section h1 {
+            color: var(--card-bg);
+            font-size: 3.8em;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        .hero-section p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+        .hero-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+        }
+        /* --- 3. Seção de Planos --- */
+        .plans-section {
+            background-color: var(--background-light);
+            text-align: center;
+        }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            justify-content: center; /* Centraliza o card quando houver apenas um */
+        }
+        .plan-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent; /* Para destacar ao selecionar */
+            cursor: pointer; /* Adicionado para indicar que o card é clicável */
+        }
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .plan-card.selected {
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .plan-type-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .plan-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: var(--heading-color);
+        }
+        .plan-card .price {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .plan-card .price span {
+            font-size: 1.6em; /* Aumenta o número do preço */
+        }
+        .plan-card .saving {
+            font-size: 0.9em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .plan-card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--card-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .plan-card .select-plan-btn {
+            width: 100%;
+            margin-top: auto; /* Empurra o botão para baixo */
+        }
+
+        /* --- 4. Seção de Agendamento (Formulário) --- */
+        .appointment-section {
+            background-color: var(--background-light);
+        }
+        .appointment-section form {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--heading-color);
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="date"],
+        .form-group select { /* Adicionado o select aqui */
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1em;
+            color: var(--text-color);
+        }
+        .form-group input[type="date"] {
+            position: relative; /* Para o hint de data */
+        }
+        .form-group .date-format-hint {
+            font-size: 0.85em;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .radio-group input[type="radio"] {
+            display: none; /* Esconde o radio button original */
+        }
+        .radio-group label {
+            display: inline-flex; /* Permite ícone/texto na mesma linha */
+            align-items: center;
+            padding: 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            margin-bottom: 0; /* Override default label margin */
+            font-weight: normal;
+        }
+        .radio-group input[type="radio"]:checked + label {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--card-bg);
+            font-weight: 600;
+        }
+        .radio-group label:hover {
+            background-color: rgba(0, 123, 255, 0.1); /* Um leve highlight ao passar o mouse */
+        }
+        .form-group small {
+            color: var(--secondary-color);
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: block;
+        }
+        /* --- 5. Seção "Como Funciona a Instalação?" --- */
+        .how-it-works-section {
+            background-color: var(--primary-color); /* Fundo com a cor primária para destaque */
+            color: var(--card-bg);
+        }
+        .how-it-works-section h2 {
+            color: var(--card-bg);
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .step-card {
+            background-color: rgba(255, 255, 255, 0.15); /* Fundo semi-transparente para o card */
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .step-card:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        .step-icon {
+            font-size: 3.5em;
+            color: var(--card-bg);
+            margin-bottom: 20px;
+        }
+        .step-card h3 {
+            color: var(--card-bg);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .step-card p {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        /* REMOVIDO: Rodapé (Footer) */
+
+        /* --- Responsividade (Media Queries) --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 2.2em; }
+            .hero-section { padding: 90px 20px; }
+            .hero-section h1 { font-size: 3em; }
+            .hero-section p { font-size: 1.2em; }
+        }
+        @media (max-width: 768px) {
+            .main-header .main-nav {
+                display: none; /* Esconde o menu de navegação padrão */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 80px; /* Abaixo do cabeçalho */
+                left: 0;
+                background-color: var(--card-bg);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+                border-top: 1px solid var(--border-color);
+            }
+            .main-header .main-nav.active {
+                display: flex; /* Mostra o menu quando ativo */
+            }
+            .main-header .main-nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .main-header .main-nav ul li a {
+                padding: 12px 0;
+                width: 100%;
+                text-align: center;
+            }
+            .main-header .header-btn {
+                display: none; /* Esconde o botão do header em mobile */
+            }
+            .hamburger-menu {
+                display: block; /* Mostra o botão hambúrguer */
+            }
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.4em; }
+            .hero-section { padding: 80px 15px; }
+            .hero-section h1 { font-size: 2.5em; }
+            .hero-section p { font-size: 1em; }
+            .hero-btn { padding: 12px 30px; font-size: 1.1em; }
+            .plans-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+            }
+            .plan-card { padding: 25px; }
+            .plan-card .price { font-size: 1.6em; }
+            .plan-card .price span { font-size: 1.4em; }
+            .appointment-section form {
+                padding: 30px;
+            }
+            .form-group input[type="text"],
+            .form-group input[type="email"],
+            .form-group input[type="tel"],
+            .form-group input[type="date"],
+            .form-group select {
+                padding: 10px;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .steps-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+            }
+            /* REMOVIDO: Responsividade do rodapé */
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            .hero-section h1 { font-size: 2.2em; }
+            .hero-section p { font-size: 0.95em; }
+            .btn { padding: 10px 20px; font-size: 0.9em; }
+            .btn-whatsapp { padding: 12px 25px; font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#quem-somos">Quem Sou</a></li>
+                    <li><a href="#planos">Nosso Plano</a></li>
+                    <li><a href="#downloads">Baixar App</a></li>
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#agendamento">Agendar Teste</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="#agendamento" class="btn btn-primary header-btn">Agende Agora</a>
+            <button class="hamburger-menu" aria-label="Abrir Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1>Conecte-se ao Futuro do Entretenimento com Nosso Plano Incrível!</h1>
+            <p>Alta definição, conteúdo exclusivo e liberdade para assistir onde estiver!</p>
+            <a href="#planos" class="btn btn-primary hero-btn">Ver Plano</a>
+        </div>
+    </section>
+
+    <section id="quem-somos" class="section">
+        <div class="container" style="text-align: center;">
+            <h2>📺 Quem Sou e o Que Faço</h2>
+            <p style="max-width: 800px; margin: 0 auto 20px; font-size: 1.1em; line-height: 1.8;">
+                Oi! Tudo bem? Eu trabalho com aplicativos e soluções para TV, transformando qualquer televisão — seja Smart ou comum — em um centro completo de entretenimento.
+            </p>
+            <p style="max-width: 800px; margin: 0 auto 40px; font-size: 1.1em; line-height: 1.8;">
+                Você vai conseguir assistir **canais ao vivo**, **filmes**, **séries**, **futebol**, **desenhos** e muito mais, tudo de forma prática, rápida e com suporte direto comigo.
+            </p>
+            <a href="#downloads" class="btn btn-primary">Ver Apps e Começar</a>
+        </div>
+    </section>
+    <section id="planos" class="plans-section">
+        <div class="container">
+            <h2>Escolha o Plano Perfeito para Você</h2>
+            <div class="plans-grid">
+                <div class="plan-card featured-plan" data-plan-name="Plano Mensal Essencial" data-plan-details="TV Essencial + Apps Básicos">
+                    <span class="plan-type-icon"><i class="far fa-calendar-alt"></i></span>
+                    <span class="badge">Sua Melhor Escolha</span>
+                    <h3>Plano Mensal Essencial</h3>
+                    <p class="price">R$ <span>30,00</span>/mês</p>
+                    <p class="saving">Ideal para quem busca o melhor custo-benefício!</p>
+                    <button class="btn btn-primary select-plan-btn">Escolher Plano</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="downloads" class="plans-section" style="background-color: var(--card-bg);">
+        <div class="container">
+            <h2>Baixe o App Agora e Comece Seu Teste Gratuito!</h2>
+            <p class="section-description" style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
+                Oferecemos diferentes aplicativos para garantir a melhor experiência na sua TV. Escolha o ideal para você ou entre em contato para orientação.
+            </p>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <span class="plan-type-icon"><i class="fas fa-tv"></i></span>
+                    <h3>UniTV para TV (TV Box/Smart TVs Android)</h3>
+                    <p>Compatível com a maioria das TV Boxes, Smart TVs com Android e celulares Android (para espelhamento).</p>
+                    <a href="https://www.unitv.cloud/unitv-tv.apk" class="btn btn-primary select-plan-btn" target="_blank">
+                        <i class="fas fa-download"></i> Baixar para TV
+                    </a>
+                </div>
+
+                <div class="plan-card">
+                    <span class="plan-type-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <h3>UniTV para Celular (Android)</h3>
+                    <p>Assista no seu smartphone ou use para espelhar na TV. Teste gratuito de 3 dias ao instalar!</p>
+                    <a href="https://www.unitv.cloud/unitv-celular.apk" class="btn btn-primary select-plan-btn" target="_blank">
+                        <i class="fas fa-download"></i> Baixar para Celular
+                    </a>
+                </div>
+
+                <div class="plan-card">
+                    <span class="plan-type-icon"><i class="fas fa-question-circle"></i></span>
+                    <h3>Não tem Android ou quer outra opção?</h3>
+                    <p>Para Smart TVs (LG, Samsung) ou TVs mais limitadas, usamos TiviPlayer ou DupleCast. Fale comigo!</p>
+                    <a href="https://api.whatsapp.com/send?phone=5515998627702&text=Olá! Gostaria de saber qual app é ideal para minha TV e como funciona o teste." class="btn btn-accent select-plan-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Converse no WhatsApp
+                    </a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 1.1em; font-weight: 600;">
+                * Ao instalar, seu teste gratuito de 3 dias é ativado automaticamente!
+            </p>
+        </div>
+    </section>
+    <section id="agendamento" class="appointment-section">
+        <div class="container">
+            <h2>Agende Seu Teste Gratuito</h2>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="selectedPlan">Plano Escolhido:</label>
+                    <select id="selectedPlan" name="selectedPlan" required>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Data Preferida:</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" required>
+                    <p class="date-format-hint">Formato: DD/MM</p>
+                </div>
+                <div class="form-group">
+                    <label>Horário Preferido:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="timeMorning" name="appointmentTime" value="Manhã (08h-12h)" required>
+                        <label for="timeMorning">Manhã (08h-12h)</label>
+                        <input type="radio" id="timeAfternoon" name="appointmentTime" value="Tarde (13h-17h)">
+                        <label for="timeAfternoon">Tarde (13h-17h)</label>
+                        <input type="radio" id="timeFullDay" name="appointmentTime" value="Comercial (08h-17h)">
+                        <label for="timeFullDay">Comercial (08h-17h)</label>
+                    </div>
+                </div>
+                <h3>Seus Dados para Contato:</h3>
+                <div class="form-group">
+                    <label for="clientName">Nome:</label>
+                    <input type="text" id="clientName" name="clientName" required placeholder="Seu nome aqui">
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">Telefone (DDD + Número):</label>
+                    <input type="tel" id="clientPhone" name="clientPhone" pattern="[0-9]{10,11}" placeholder="(XX) XXXXX-XXXX" required>
+                    <small>Apenas números. Ex: 11987654321</small>
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail">Email (Opcional):</label>
+                    <input type="email" id="clientEmail" name="clientEmail" placeholder="seuemail@exemplo.com">
+                </div>
+                <button type="submit" id="sendWhatsappBtn" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Enviar Pedido via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="how-it-works-section">
+        <div class="container">
+            <h2>Como Funciona o Teste e a Ativação?</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>1. Baixe e Teste Grátis</h3>
+                    <p>Instale o app na sua TV ou celular. Você ganha automaticamente 3 dias de teste grátis para conhecer tudo!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>2. Escolha o App Ideal</h3>
+                    <p>Trabalho com: **UniTV** (TV Box Android), **TiviPlayer** (Smart TVs LG/Samsung) e **DupleCast** (TVs limitadas). Me informe o modelo da sua TV e eu te ajudo a escolher!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3>3. Ativação Rápida via WhatsApp</h3>
+                    <p>No 3º dia, entre em contato! Você ativa sua assinatura e o pagamento é simples via Pix, cartão ou transferência. O suporte é direto comigo, no WhatsApp!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-box"></i></div>
+                    <h3>4. Precisa de uma TV Box?</h3>
+                    <p>Para TVs antigas, tenho **TV Box configurada por R$ 150**, pronta para usar e com 2 meses de garantia! Perfeito para você!</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 1.1em; color: var(--card-bg); margin-bottom: 20px;">
+                    **Entrega da TV Box:** Para o centro de São Paulo, posso enviar via Uber/motoboy (taxa de R$ 10 a R$ 20) ou você pode retirar. Para outras cidades/estados, envio pelos Correios (frete conforme CEP).
+                </p>
+                <a href="https://api.whatsapp.com/send?phone=5515998627702&text=Olá! Gostaria de saber mais sobre a TV Box ou sobre os aplicativos para TV." class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Converse no WhatsApp!
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section" style="background-color: var(--background-light); padding: 40px 0;">
+        <div class="container" style="text-align: center;">
+            <h2>📞 Fale Comigo!</h2>
+            <p style="font-size: 1.1em; margin-bottom: 30px;">
+                Quer saber qual app funciona na sua TV? Ou quer a TV Box prontinha? Me chama no WhatsApp que eu te explico tudo rapidinho!
+            </p>
+            <a href="https://api.whatsapp.com/send?phone=5515998627702&text=Olá! Gostaria de falar com você sobre os planos e apps de TV." class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> CLIQUE AQUI PARA ME CHAMAR NO WHATSAPP
+            </a>
+            <p style="margin-top: 20px; color: var(--secondary-color);">
+                Atendimento direto e personalizado para você!
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const planCards = document.querySelectorAll('.plan-card');
+            const selectedPlanSelect = document.getElementById('selectedPlan');
+            const appointmentForm = document.getElementById('appointmentForm');
+            const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
+            const dateInput = document.getElementById('appointmentDate');
+
+            // Função para atualizar o seletor e o card selecionado
+            function updateSelectedPlan(planName, planDetails) {
+                // Aqui, o valor que será setado no select continua sendo o nome + detalhes para garantir que a opção correta seja selecionada.
+                const fullPlanText = `${planName}${planDetails ? ' - ' + planDetails : ''}`;
+                selectedPlanSelect.value = fullPlanText;
+
+                // Remove a classe 'selected' de todos os cards
+                document.querySelectorAll('.plan-card').forEach(pCard => {
+                    pCard.classList.remove('selected');
+                });
+
+                // Encontra e adiciona a classe 'selected' ao card correspondente
+                // Note: Aqui estamos selecionando apenas o "Plano Mensal Essencial" na seção de planos
+                const correspondingCard = document.querySelector(`.plans-section #planos .plan-card[data-plan-name="${planName}"][data-plan-details="${planDetails}"]`);
+                if (correspondingCard) {
+                    correspondingCard.classList.add('selected');
+                }
+            }
+
+            // 1. Popular o SELECT com o único plano ao carregar a página
+            function populatePlanSelect() {
+                selectedPlanSelect.innerHTML = ''; // Limpa as opções existentes
+
+                const planName = "Plano Mensal Essencial";
+                const planDetails = "TV Essencial + Apps Básicos"; // Detalhes do plano de R$30
+                const option = document.createElement('option');
+                option.value = `${planName} - ${planDetails}`; // Valor completo para o WhatsApp
+                option.textContent = planName; // Texto visível no select
+                option.selected = true; // Seleciona automaticamente este plano
+                selectedPlanSelect.appendChild(option);
+
+                // Como só há um plano na seção #planos, já o marca como selecionado visualmente
+                const onlyPlanCard = document.querySelector('#planos .plan-card');
+                if (onlyPlanCard) {
+                    onlyPlanCard.classList.add('selected');
+                }
+            }
+            populatePlanSelect(); // Chama a função para popular o select
+
+            // 2. Comportamento ao clicar no CARD (ou botão "Escolher Plano")
+            // Este bloco pode ser simplificado, pois só há um plano agora na seção de planos principal.
+            document.querySelectorAll('#planos .plan-card').forEach(card => {
+                card.addEventListener('click', (event) => {
+                    const planName = card.dataset.planName;
+                    const planDetails = card.dataset.planDetails;
+                    updateSelectedPlan(planName, planDetails); // Atualiza o select e o card
+                });
+
+                const selectButton = card.querySelector('.select-plan-btn');
+                if (selectButton) {
+                    selectButton.addEventListener('click', (event) => {
+                        event.stopPropagation(); // Impede que o clique no botão se propague para o card
+                        const planName = card.dataset.planName;
+                        const planDetails = card.dataset.planDetails;
+                        updateSelectedPlan(planName, planDetails); // Atualiza o select e o card
+                    });
+                }
+            });
+
+            // 3. Comportamento ao alterar o SELECT diretamente
+            // Este listener é menos crítico agora que só há um plano e ele é pré-selecionado.
+            selectedPlanSelect.addEventListener('change', () => {
+                const selectedValue = selectedPlanSelect.value;
+                if (selectedValue === "") {
+                    document.querySelectorAll('#planos .plan-card').forEach(pCard => {
+                        pCard.classList.remove('selected');
+                    });
+                } else {
+                    let planName = selectedValue;
+                    let planDetails = '';
+                    const match = selectedValue.match(/(.*) - (.*)/);
+                    if (match) {
+                        planName = match[1].trim();
+                        planDetails = match[2].trim();
+                    }
+                    updateSelectedPlan(planName, planDetails);
+                }
+            });
+
+            // Formatar a data para DD/MM
+            function formatarData(dataISO) {
+                if (!dataISO) return '';
+                const [ano, mes, dia] = dataISO.split('-');
+                return `${dia}/${mes}`;
+            }
+
+            // Gerar mensagem do WhatsApp ao enviar o formulário
+            appointmentForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Evita o envio padrão do formulário
+
+                // Coletar dados do formulário
+                const plano = selectedPlanSelect.value; // Pega o valor COMPLETO do SELECT
+                const dataAgendamento = formatarData(dateInput.value);
+                const horarioAgendamento = document.querySelector('input[name="appointmentTime"]:checked')?.value || 'Não informado';
+                const nome = document.getElementById('clientName').value;
+                const telefone = document.getElementById('clientPhone').value;
+                const email = document.getElementById('clientEmail').value;
+
+                // Validação simples para garantir que um plano foi selecionado (redundante agora, mas bom manter)
+                if (!plano || plano === "") {
+                    alert("Por favor, selecione um plano antes de enviar.");
+                    return;
+                }
+
+                // Montar a mensagem
+                const whatsappMessage = `Olá! Gostaria de agendar o teste Gratuito da TV.
+*Plano Escolhido:* ${plano}
+*Data Preferida:* ${dataAgendamento}
+*Horário Preferido:* ${horarioAgendamento}
+
+*Meus Dados:*
+*Nome:* ${nome}
+*Telefone:* ${telefone}
+*Email:* ${email || 'Não informado'}
+
+Por favor, confirme a disponibilidade e me oriente sobre o suporte para ativação da TV via WhatsApp. Obrigado!
+
+*Observação sobre a TV Box e Entrega:*
+Para o centro de São Paulo, posso enviar via Uber/motoboy (taxa de R$ 10 a R$ 20) ou você pode retirar. Para outras cidades/estados, envio pelos Correios (frete conforme CEP).
+                `.trim(); // O .trim() remove espaços em branco extras no início/fim
+
+                // Codificar a mensagem para URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+
+                // Número de telefone para o WhatsApp (substitua pelo seu!)
+                const phoneNumber = "5515998627702"; // Ex: 55 DDD NÚMERO (Coloque o seu número real aqui)
+
+                // Criar o link do WhatsApp
+                const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+                // Abrir o WhatsApp
+                window.open(whatsappLink, '_blank');
+            });
+
+            // Lógica do menu hambúrguer (simplificado)
+            const hamburgerBtn = document.querySelector('.hamburger-menu');
+            const mainNav = document.querySelector('.main-nav');
+
+            hamburgerBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+            // Ocultar menu ao clicar em um link (apenas para mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
